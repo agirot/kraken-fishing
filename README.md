@@ -5,9 +5,6 @@
 NAME:
    Catch The Kraken !
 
-USAGE:
-   main [global options] command [command options] [arguments...]
-
 VERSION:
    v0.1
 
