@@ -2,26 +2,27 @@ package main
 
 import (
 	"fmt"
+	"log"
 )
 
 func sell(target, currentClosedPrice float64) bool {
 	//Target reached
 	if currentClosedPrice >= target {
 		if previousClosedPrice == 0 {
-			fmt.Println("target reached ! Now wait the best price")
+			log.Println("target reached ! Now wait the best price")
 		} else {
 			//Check IF SELL
 			if previousClosedPrice > currentClosedPrice {
 				//CHECK IF HOLD
 				if currentHoldCount >= maxHoldCount  {
-					fmt.Println("Don't wait anymore, SELL !")
+					log.Println("Don't wait anymore, SELL !")
 					return true
 				} else {
 					currentHoldCount = currentHoldCount + 1
-					fmt.Println("Args ! The last price is lower than the previous one, hold on...")
+					log.Println(fmt.Sprintf("Args ! The current price (%v) is lower than the previous one (%v), hold on...", currentClosedPrice, previousClosedPrice))
 				}
 			} else {
-				fmt.Println("Good, the current price is better than the previous, wait")
+				log.Println(fmt.Sprintf("Good, the current price (%v) is better than the previous one (%v), wait", currentClosedPrice, previousClosedPrice))
 			}
 		}
 		previousClosedPrice = currentClosedPrice
@@ -36,20 +37,20 @@ func buy(target, currentClosedPrice float64) bool {
 	//Target reached
 	if currentClosedPrice <= target {
 		if previousClosedPrice == 0 {
-			fmt.Println("target reached ! Now wait the best price")
+			log.Println("target reached ! Now wait the best price")
 		} else {
 			//Check IF BUY
 			if previousClosedPrice < currentClosedPrice {
 				//CHECK IF HOLD
 				if currentHoldCount >= maxHoldCount  {
-					fmt.Println("Don't wait anymore, BUY !")
+					log.Println("Don't wait anymore, BUY !")
 					return true
 				} else {
 					currentHoldCount = currentHoldCount + 1
-					fmt.Println("Args ! The last price is higher than the previous one, hold on...")
+					log.Println(fmt.Sprintf("Args ! The current price (%v) is higher than the previous one (%v), hold on...", currentClosedPrice, previousClosedPrice))
 				}
 			} else {
-				fmt.Println("Good, the current price is better than the previous, wait")
+				log.Println(fmt.Sprintf("Good, the current price (%v) is better than the previous (%v), wait", currentClosedPrice, previousClosedPrice))
 			}
 		}
 		previousClosedPrice = currentClosedPrice

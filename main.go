@@ -40,6 +40,8 @@ type config struct {
 var configFile config
 
 func init() {
+	log.SetFlags(log.Ldate | log.Ltime)
+
 	app = &cli.App{
 		Name:        "Catch The Kraken !",
 		Version:     "v0.1",
@@ -149,7 +151,7 @@ func main() {
 				}
 
 				if volume == "all" {
-					volume = strconv.FormatFloat(balance,'f',8, 64)
+					volume = strconv.FormatFloat(balance, 'f', 8, 64)
 				} else {
 					volumeFl, err := strconv.ParseFloat(volume, 64)
 					if err != nil {
@@ -163,7 +165,7 @@ func main() {
 				}
 
 				ticker := time.NewTicker(tick)
-				fmt.Printf("Start to fishing %v ! target to %v with %v quantities (hold %v times and check every %v seconds)\n",
+				fmt.Printf("Start to fishing %v ! target to %v with %v quantities (hold %v times and check every %v)\n",
 					pairName, target, volume, maxHoldCount, tick)
 				fmt.Printf("DEMO mode: %v\n", test)
 				for _ = range ticker.C {
@@ -253,7 +255,7 @@ func main() {
 
 				ticker := time.NewTicker(tick)
 				pair := c.Args().Get(0)
-				fmt.Printf("Start to fishing %v ! target to %v with %v quantities (hold %v times and check every %v seconds)\n",
+				fmt.Printf("Start to fishing %v ! target to %v with %v quantities (hold %v times and check every %v)\n",
 					pair, target, c.Args().Get(1), maxHoldCount, tick)
 				fmt.Printf("DEMO mode: %v\n", test)
 
